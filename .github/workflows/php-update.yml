@@ -1,0 +1,33 @@
+name: PHP Update
+
+on:
+  schedule:
+    - cron: '15 06 * * *'
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Run Update Script
+      run: php update.php
+      
+    - name: Git Commmit
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global  user.email "<>"     
+        
+        git add ./data/
+        
+        git commit -am "GitHub Actions"
+        
+        git push

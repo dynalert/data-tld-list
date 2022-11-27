@@ -28,6 +28,6 @@ jobs:
         
         git add ./data/
         
-        git commit -am "GitHub Actions"
+        git diff-index --quiet HEAD || git commit -am "GitHub Actions"
         
         git push
